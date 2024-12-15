@@ -305,12 +305,12 @@ def __(df_rba, df_rbb, go, pl):
     ])
 
     _fig.update_layout(
-        title=f'24/07 - 31/07 2024 Comparison of mean rockbreaking time (minutes) per Location',
+        title=f'24/07 - 31/07 2024 Comparison of mean rockbreaking time (hours) per Location',
         xaxis=dict(
             title='Location' # X-axis label
         ),
         yaxis=dict(
-            title='Downtime (minutes)' # Y-axis label
+            title='Downtime (hours)' # Y-axis label
             )
     )
     _fig
@@ -569,7 +569,7 @@ def __(df_ag, df_bg, end_time, pl, start_time):
         (pl.col('EVENT_START')>=start_time)
     ).sort("LENGTH", descending=False).with_columns(
         (pl.col("MASS")/pl.col('LENGTH')).alias("MASS_DT_RATIO"),
-        (pl.col('LENGTH')/60).alias('LENGTH')
+        (pl.col('LENGTH')).alias('LENGTH')
     )
 
     # Location B data filtered by start and time, sorted by downtime length and calculating mass/downtime ratio
@@ -580,6 +580,11 @@ def __(df_ag, df_bg, end_time, pl, start_time):
         (pl.col("MASS")/pl.col('LENGTH')).alias("MASS_DT_RATIO")
     )
     return df_week_a, df_week_b
+
+
+@app.cell
+def __():
+    return
 
 
 @app.cell
@@ -604,7 +609,7 @@ def __(df_week_a, make_subplots, pl, px):
         y="LENGTH",
         color="ROCKY_RATIO",
         category_orders={"ORIGIN": _ordered_length},
-        title="Rockbreaking Time (Hours) per Zone"
+        title="Rockbreaking Time (Minutes) per Zone"
     )
 
     # Create the second figure (Total Mass/Downtime Ratio)
@@ -614,7 +619,7 @@ def __(df_week_a, make_subplots, pl, px):
         y="MASS_DT_RATIO",
         color="ROCKY_RATIO",
         category_orders={"ORIGIN": _ordered_massdt},
-        title="Downtime (Hours) per Zone"
+        title="Downtime (Minutes) per Zone"
     )
 
     # Create a subplot figure to place both figures
@@ -623,7 +628,7 @@ def __(df_week_a, make_subplots, pl, px):
         shared_xaxes=False, 
         vertical_spacing=0.2,
         subplot_titles=[
-            "Rockbreaking Time (Hours) per Zone",
+            "Rockbreaking Time (Minutes) per Zone",
             "Mass dumped per Downtime (T/min) per Zone"
         ]
     )
@@ -688,7 +693,7 @@ def __(df_week_b, make_subplots, pl, px):
         y="LENGTH",
         color="ROCKY_RATIO",
         category_orders={"ORIGIN": _ordered_length},
-        title="Rockbreaking Time (Hours) per Zone"
+        title="Rockbreaking Time (Minutes) per Zone"
     )
 
     # Create the second figure (Total Mass/Downtime Ratio)
@@ -707,7 +712,7 @@ def __(df_week_b, make_subplots, pl, px):
         shared_xaxes=False, 
         vertical_spacing=0.2,
         subplot_titles=[
-            "Rockbreaking Time (Hours)",
+            "Rockbreaking Time (Minutes)",
             "Mass dumped per Downtime (T/min)"
         ]
     )
@@ -733,7 +738,7 @@ def __(df_week_b, make_subplots, pl, px):
             categoryorder="array",
             categoryarray=_ordered_massdt
         ),
-        yaxis=dict(title="Rockbreaking Time (Hours)"),
+        yaxis=dict(title="Rockbreaking Time (Minutes)"),
         yaxis2=dict(title="Mass dumped per downtime (T/min)"),
         height=800
     )
