@@ -87,7 +87,7 @@ def __(mo):
         * TRUCK_ID: unique truck identifier.
         * ROCKY_RATIO: calculated likeliness for a material to be rocky - 1 being rocky and 5 being not rocky. Rockier material tends to generate more rockbreaking events.
 
-        ##DOWNTIME_DATA 
+        ##RB_DATA 
 
         * AREA: indicates in which crusher (A or B) the rockbreaking event occurred.
         * LOCATION: indicates at which section of primary crusher (Grizzly or Crusher) the rockbreaking event occurred.
@@ -556,8 +556,6 @@ def __(mo):
 
         ### Location B - 26th of July
         A total of 24 rockbreaking events ocurred on this day. 13 out of 24 events had a rocky ratio of ~1 which would mean that this is an accurate ratio for said location. whilst other events had rocky ratios of ~2 it is not as frequent as the lower ratio ones.
-
-
         """
     )
     return
@@ -766,7 +764,7 @@ def __(mo):
         #Conclusions
         This report seemed efficient to revise zones with potentially misclassified rocky ratios which impacts the operations strategy. More in depth investigation could potentially assist in comparing the rockbreaking performance of different individuals, or even the pre-processing of rocks in the pit from different crews.
 
-        I believe this report could provide great assistance to relevant engineers within the minign industry.
+        I believe this report could provide great assistance to relevant engineers within the industry.
         """
     )
     return
